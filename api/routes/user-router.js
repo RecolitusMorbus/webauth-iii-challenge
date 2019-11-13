@@ -4,7 +4,7 @@ const Users = require('../models/user-models.js');
 const restricted = require('../auth/restricted-middleware.js');
 const checkRole = require('../auth/check-role.js');
 
-router.get('/', restricted, checkRole('student'), (req, res) => {
+router.get('/', restricted, checkRole(['student', 'admin']), (req, res) => {
   Users
     .find()
     .then(users => {
