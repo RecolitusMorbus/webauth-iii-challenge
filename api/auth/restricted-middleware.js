@@ -9,13 +9,9 @@ module.exports = (req, res, next) => {
       if(err) {
         res.status(401).json({ message: `Invalid credentials.` });
       } else {
-        req.user = {
-          roles: decodedToken.roles,
-          username: decodeToken.username
-        };
-        
+        req.decodedJwt = decodedToken;
         next();
-      }
+      };
     });
   } else {
     res.status(400).json({ message: `No token provided.` });
